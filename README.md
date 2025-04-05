@@ -1,4 +1,4 @@
-# WarpSpeed Banking System
+# WarpSpeed Banking System Prototype
 
 ![Banking System Logo](https://img.shields.io/badge/WarpSpeed-Banking-blue)
 ![Version](https://img.shields.io/badge/version-1.0.0-green)
@@ -7,7 +7,7 @@
 
 ## Overview
 
-WarpSpeed Banking System is a comprehensive, modular banking framework that provides multi-bank account integration capabilities. This system allows users to manage multiple financial accounts from different providers in a single interface, streamlining personal finance management through a unified API.
+WarpSpeed Banking System  prototype is a comprehensive, modular banking framework that provides multi-bank account integration capabilities. This system allows users to manage multiple financial accounts from different providers in a single interface, streamlining personal finance management through a unified API.
 
 The system is designed with a focus on object-oriented principles, thread safety, and extensibility, making it suitable for both educational purposes and as a foundation for production financial applications.
 
@@ -67,6 +67,7 @@ The WarpSpeed Banking System is built using a modular architecture with clean se
 ```
 
 This architecture follows these design principles:
+
 - **Composition over Inheritance**: Components are composed rather than inherited
 - **Dependency Injection**: Dependencies are injected for better testability
 - **Interface Segregation**: Clean interfaces between components
@@ -83,8 +84,8 @@ This architecture follows these design principles:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/warpspeed-banking.git
-cd warpspeed-banking
+git clone https://github.com/ymayowa-kalejaiye/multi-bank-integration.git
+cd multi-bank-integration
 
 # Install the package
 pip install -e .
@@ -259,6 +260,7 @@ banking/
 ```
 
 Supporting files:
+
 ```
 setup.py                # Package installation configuration
 demo_banking.py         # Demonstration script
@@ -440,7 +442,7 @@ Protocol classes (structural typing) are used instead of abstract base classes b
 Dataclasses are used for data-centric structures because:
 
 1. They reduce boilerplate code for simple data containers
-2. They automatically generate useful methods (__init__, __repr__, etc.)
+2. They automatically generate useful methods (**init**, **repr**, etc.)
 3. They support immutability (frozen=True) for safer data handling
 
 ### Why Context Managers for Transactions?
