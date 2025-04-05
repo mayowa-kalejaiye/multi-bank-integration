@@ -7,7 +7,7 @@
 
 ## Overview
 
-WarpSpeed Banking System  prototype is a comprehensive, modular banking framework that provides multi-bank account integration capabilities. This system allows users to manage multiple financial accounts from different providers in a single interface, streamlining personal finance management through a unified API.
+WarpSpeed Banking System prototype is a comprehensive, modular banking framework that provides multi-bank account integration capabilities. This system allows users to manage multiple financial accounts from different providers in a single interface, streamlining personal finance management through a unified API.
 
 The system is designed with a focus on object-oriented principles, thread safety, and extensibility, making it suitable for both educational purposes and as a foundation for production financial applications.
 
@@ -21,6 +21,7 @@ The system is designed with a focus on object-oriented principles, thread safety
 - [Project Structure](#project-structure)
 - [Key Components](#key-components)
 - [Advanced Features](#advanced-features)
+- [Error Handling and Edge Cases](#error-handling-and-edge-cases)
 - [Extending the System](#extending-the-system)
 - [Technical Design Decisions](#technical-design-decisions)
 - [Development Guidelines](#development-guidelines)
@@ -263,7 +264,7 @@ Supporting files:
 
 ```
 setup.py                # Package installation configuration
-demo_banking.py         # Demonstration script
+demo_banking.py         # Comprehensive demonstration script with edge case testing
 README.md               # This documentation file
 ```
 
@@ -392,6 +393,66 @@ class TransactionResult:
     # ...other fields...
 ```
 
+### API Backward Compatibility
+
+The system includes features to maintain backward compatibility when the API evolves:
+
+- **Property Getters**: Alternative property names (e.g., Transaction.type property that maps to transaction_type)
+- **Flexible Input Types**: Methods accept multiple input formats where appropriate
+- **Default Parameter Values**: Sensible defaults to maintain compatibility with older calling code
+- **Type Conversions**: Automatic conversion between string representations and enum types
+- **Fallback Behaviors**: Graceful handling of deprecated features
+
+This approach allows the codebase to evolve while minimizing breaking changes for dependent code.
+
+## Error Handling and Edge Cases
+
+The system includes robust error handling mechanisms and carefully manages edge cases:
+
+### Comprehensive Error Handling
+
+- **Structured Exception Hierarchy**: Domain-specific exceptions for different error scenarios
+- **Descriptive Error Messages**: Clear feedback on what went wrong and why
+- **Error Logging**: All exceptions are logged for troubleshooting
+- **Transaction Safety**: Rollback mechanism prevents partial operations
+- **Validation Checks**: Input validation prevents invalid operations
+
+### Edge Cases Covered
+
+- **Account Creation**: Prevents negative initial balance
+- **Credit Handling**: Manages withdrawals within credit limits
+- **Account Linking**: Prevents circular references and duplicate linking
+- **Security**: Enforces proper account access controls
+- **Funds Transfer**: Validates accounts and amounts before transferring
+- **Loan Processing**: Validates loan amounts and eligibility
+- **Deserialization**: Handles missing or malformed data
+
+### Common Error Scenarios and Solutions
+
+- **AttributeError**: When accessing renamed attributes - use provided compatibility properties (e.g., Transaction.type instead of looking for deprecated attribute names)
+- **TypeError**: Check parameter types match expected types - the system provides helpful error messages
+- **ValueError**: Ensure values are within expected ranges and formats
+- **KeyError**: When accessing non-existent dictionary keys - use .get() with defaults
+
+### Demonstration Script
+
+The project includes a comprehensive demonstration script (`demo_banking.py`) that:
+
+- Tests all standard functionality
+- Verifies correct handling of edge cases
+- Validates calculation accuracy
+- Exercises every component of the system
+- Generates detailed operation logs
+- Captures and reports test results
+
+Running this script provides a complete verification of the system's robustness:
+
+```bash
+python demo_banking.py
+```
+
+The script generates JSON result files that document all operations and their outcomes for analysis.
+
 ## Extending the System
 
 ### Adding New Transaction Types
@@ -453,6 +514,17 @@ Context managers are used for transaction safety because:
 2. They make transaction boundaries explicit in the code
 3. They centralize rollback logic for consistency
 
+### API Design Choices
+
+The banking system API is designed with these principles:
+
+1. **Consistency**: Similar operations follow similar patterns
+2. **Discoverability**: Related functionality is grouped together
+3. **Simplicity**: Common operations are straightforward to use
+4. **Flexibility**: Advanced scenarios are possible without modifying core code
+5. **Backward Compatibility**: Changes preserve compatibility where possible
+6. **Forward Compatibility**: Extension points allow for future enhancements
+
 ## Development Guidelines
 
 ### Coding Standards
@@ -460,14 +532,18 @@ Context managers are used for transaction safety because:
 - Follow PEP 8 style guidelines
 - Use type hints for all function parameters and return values
 - Write comprehensive docstrings in Google style format
+- Include error handling for all operations
 - Keep methods focused on a single responsibility
+- Test edge cases explicitly
 
 ### Testing Recommendations
 
 - Write unit tests for each component in isolation
 - Create integration tests for component interactions
+- Test edge cases and error conditions thoroughly
 - Use property-based testing for financial calculations
 - Test thread safety with concurrent operation tests
+- Run the comprehensive demonstration script before commits
 
 ### Pull Request Process
 
@@ -576,6 +652,21 @@ The WarpSpeed Banking System implements several software engineering best practi
 **Problem**: Transactions fail without clear reasons.
 **Solution**: Check the logs for transaction context errors and ensure proper context usage.
 
+#### Edge Case Failures
+
+**Problem**: Operations fail unexpectedly in certain scenarios.
+**Solution**: Run the demo_banking.py script to test against known edge cases and verify your implementation handles them correctly.
+
+#### Serialization Issues
+
+**Problem**: Errors when deserializing account data.
+**Solution**: Ensure all required fields are present and check for format compatibility issues.
+
+#### AttributeError on Transaction Objects
+
+**Problem**: AttributeError when accessing Transaction.type.
+**Solution**: The Transaction class provides both 'transaction_type' and 'type' properties. Use either consistently in your code.
+
 ## Contributing
 
 Contributions to the WarpSpeed Banking System are welcome! Please follow these steps:
@@ -610,7 +701,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-*This documentation was last updated on: [05/04/2025]*
+*This documentation was last updated on: [Current Date]*
 
 *This Banking System is a demonstration project and not intended for production financial applications without additional security and compliance features.*
 ````

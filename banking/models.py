@@ -142,6 +142,17 @@ class Transaction:
         
         # Increment the class-level counter
         Transaction.transaction_count += 1
+    
+    @property
+    def type(self):
+        """
+        Property to access transaction_type as 'type'.
+        This provides backward compatibility with code expecting a 'type' attribute.
+        
+        Returns:
+            The transaction type enum
+        """
+        return self.transaction_type
         
     def __str__(self) -> str:
         """String representation of the transaction."""

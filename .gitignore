@@ -34,6 +34,10 @@ ENV/
 warpspeed.config.js
 warpspeed-cache/
 
-# Generated JSON files
+# Generated JSON files from demo_banking.py
+# These are created in the project root directory when running demo_banking.py
+# remove these files if you want to see the data
 primary_account.json
 account_store.json
+operation_results.json
+

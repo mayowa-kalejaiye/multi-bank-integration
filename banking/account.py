@@ -37,6 +37,7 @@ class BankAccount(BankingInterface):
         self.account_id = self._generate_account_id(acctName, initialAmount)
         self.provider = "Default"  # Bank provider (PalmPay, MoneyPoint, etc.)
         self.status = AccountStatus.ACTIVE
+        self.last_transaction_time = datetime.now()  
         
         # Initialize component objects - composition pattern
         self.loan_manager = LoanManager(self)
@@ -158,6 +159,7 @@ class BankAccount(BankingInterface):
     def add_transaction(self, transaction: Transaction) -> None:
         """Add a transaction to the account history."""
         self.transactions.append(transaction)
+        self.last_transaction_time = datetime.now()  # Update transaction time
     
     @transaction_logger
     def deposit(self, amount: float, description: str = "Deposited amount") -> TransactionResult:
@@ -204,7 +206,12 @@ class BankAccount(BankingInterface):
                 self.balance -= amount
                 
                 # Create and add transaction
-                tx = Transaction(TransactionType.WITHDRAWAL, amount, description, self.provider)
+                tx = Transaction(
+                    TransactionType.WITHDRAWAL,
+                    amount, 
+                    description, 
+                    self.provider
+                )
                 self.add_transaction(tx)
             
             print(f"✅ Withdrawn ${amount:.2f}. New balance: ${self.balance:.2f}\n")
@@ -252,7 +259,12 @@ class BankAccount(BankingInterface):
                 self.balance -= fee
                 
                 # Create and add transaction
-                tx = Transaction(TransactionType.FEE, fee, "Maintenance Fee Deducted", self.provider)
+                tx = Transaction(
+                    TransactionType.FEE,
+                    fee,
+                    "Maintenance Fee Deducted",
+                    self.provider
+                )
                 self.add_transaction(tx)
             
             print(f"⚠ Maintenance Fee Deducted: ${fee:.2f}. New Balance: ${self.balance:.2f}\n")
@@ -308,7 +320,8 @@ class BankAccount(BankingInterface):
             'loan_balance': self.loan_manager.loan_balance,
             'interest_rate': self.loan_manager.interest_rate,
             'loan_history': self.loan_manager.loan_history,
-            'linked_accounts': list(self.account_linking.external_ids.keys())
+            'linked_accounts': list(self.account_linking.external_ids.keys()),
+            'last_transaction_time': str(self.last_transaction_time)  # Add this field
         }
     
     @classmethod
@@ -339,6 +352,16 @@ class BankAccount(BankingInterface):
         account.loan_manager.loan_balance = data['loan_balance']
         account.loan_manager.interest_rate = data['interest_rate']
         account.loan_manager.loan_history = data['loan_history']
+        
+        # Restore last transaction time if available
+        if 'last_transaction_time' in data:
+            try:
+                account.last_transaction_time = datetime.fromisoformat(data['last_transaction_time'])
+            except (ValueError, TypeError):
+                # If there's any issue parsing the datetime, use current time
+                account.last_transaction_time = datetime.now()
+        else:
+            account.last_transaction_time = datetime.now()
         
         return account
     
