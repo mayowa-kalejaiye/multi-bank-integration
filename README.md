@@ -84,7 +84,7 @@ This architecture follows these design principles:
 
 ```bash
 # Clone the repository
-git clone https://github.com/ymayowa-kalejaiye/multi-bank-integration.git
+git clone https://github.com/mayowa-kalejaiye/multi-bank-integration.git
 cd multi-bank-integration
 
 # Install the package
@@ -522,6 +522,41 @@ For high concurrency scenarios:
 - Comprehensive audit logging
 - Fraud detection on unusual activities
 
+## Software Engineering Practices
+
+The WarpSpeed Banking System implements several software engineering best practices:
+
+### Object-Oriented Programming Principles
+- **Encapsulation**: Each component encapsulates its internal state and implementation details
+- **Abstraction**: High-level interfaces hide underlying complexity
+- **Polymorphism**: Different account types and transaction processors share common interfaces
+- **Single Responsibility Principle**: Each class has one reason to change
+- **Open/Closed Principle**: Components are open for extension but closed for modification
+
+### Design Patterns
+- **Facade Pattern**: BankAccount provides a simplified interface to the complex subsystems
+- **Decorator Pattern**: Transaction logging decorators add functionality without modifying core code
+- **Strategy Pattern**: Different loan approval algorithms can be swapped at runtime
+- **Observer Pattern**: Notification system for account events
+- **Factory Method**: Used for creating different transaction types
+
+### Architectural Approaches
+- **Modular Design**: Clear separation between components with well-defined interfaces
+- **Composition Over Inheritance**: Components are composed rather than using deep inheritance hierarchies
+- **Dependency Injection**: Components receive their dependencies rather than creating them
+- **Immutable Data**: Transaction records are immutable once created
+
+### Concurrent Programming
+- **Thread Safety**: Locks protect shared resources during concurrent access
+- **Atomic Operations**: Transaction contexts ensure operations complete fully or not at all
+- **Non-blocking Algorithms**: Used where appropriate to improve performance
+
+### Other Modern Practices
+- **Type Hints**: Python type annotations for better tooling and code quality
+- **Protocol Classes**: Structural typing for flexible interfaces
+- **Context Managers**: Used for resource management and transaction safety
+- **Defensive Programming**: Input validation and error checking throughout the codebase
+
 ## Troubleshooting
 
 ### Common Issues and Solutions
@@ -578,3 +613,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 *This documentation was last updated on: [05/04/2025]*
 
 *This Banking System is a demonstration project and not intended for production financial applications without additional security and compliance features.*
+````
