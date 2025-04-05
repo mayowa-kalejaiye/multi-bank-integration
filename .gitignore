@@ -41,3 +41,5 @@ primary_account.json
 account_store.json
 operation_results.json
 
+# To exclude history files from version control
+.history
