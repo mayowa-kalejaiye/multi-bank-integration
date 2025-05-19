@@ -1,0 +1,85 @@
+{
+  "account_id": "660c81890f02",
+  "name": "Primary Account",
+  "balance": 3025.0,
+  "savings": 175.0,
+  "provider": "WarpSpeed",
+  "credit_score": 490,
+  "credit_limit": 200,
+  "auto_savings_percentage": 15,
+  "status": "active",
+  "transactions": [
+    {
+      "transaction_id": "WarpSpeed-20250406002135-0",
+      "timestamp": "2025-04-06T00:21:35.079148",
+      "transaction_type": "deposit",
+      "amount": 500,
+      "description": "Regular deposit | Auto-Saved $25.00",
+      "provider": "WarpSpeed"
+    },
+    {
+      "transaction_id": "WarpSpeed-20250406002135-1",
+      "timestamp": "2025-04-06T00:21:35.079148",
+      "transaction_type": "withdrawal",
+      "amount": 200,
+      "description": "Regular withdrawal",
+      "provider": "WarpSpeed"
+    },
+    {
+      "transaction_id": "WarpSpeed-20250406002135-3",
+      "timestamp": "2025-04-06T00:21:35.085153",
+      "transaction_type": "transfer",
+      "amount": 300,
+      "description": "Transferred to PalmPay account",
+      "provider": "WarpSpeed"
+    },
+    {
+      "transaction_id": "WarpSpeed-20250406002135-5",
+      "timestamp": "2025-04-06T00:21:35.088159",
+      "transaction_type": "loan",
+      "amount": 500,
+      "description": "Loan approved: personal loan",
+      "provider": "WarpSpeed"
+    },
+    {
+      "transaction_id": "WarpSpeed-20250406002135-6",
+      "timestamp": "2025-04-06T00:21:35.090524",
+      "transaction_type": "repayment",
+      "amount": 200,
+      "description": "Repaid loan amount",
+      "provider": "WarpSpeed"
+    },
+    {
+      "transaction_id": "WarpSpeed-20250406002135-7",
+      "timestamp": "2025-04-06T00:21:35.092538",
+      "transaction_type": "withdrawal",
+      "amount": 100,
+      "description": "After unlocking",
+      "provider": "WarpSpeed"
+    },
+    {
+      "transaction_id": "WarpSpeed-20250406002135-8",
+      "timestamp": "2025-04-06T00:21:35.094523",
+      "transaction_type": "deposit",
+      "amount": 1000,
+      "description": "Testing auto-savings | Auto-Saved $150.00",
+      "provider": "WarpSpeed"
+    }
+  ],
+  "loan_balance": 300,
+  "interest_rate": 0.05,
+  "loan_history": [
+    {
+      "date": "2025-04-06T00:21:35.088159",
+      "amount": 500,
+      "interest_rate": 0.05,
+      "loan_type": "personal",
+      "status": "active"
+    }
+  ],
+  "linked_accounts": [
+    "PalmPay",
+    "MoneyPoint"
+  ],
+  "last_transaction_time": "2025-04-06 00:21:35.094523"
+}

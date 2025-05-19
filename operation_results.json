@@ -1,0 +1,202 @@
+{
+  "account_creation": [
+    {
+      "name": "Primary Account",
+      "provider": "WarpSpeed",
+      "initial_balance": 2000,
+      "id": "660c81890f02"
+    },
+    {
+      "name": "PalmPay Account",
+      "provider": "PalmPay",
+      "initial_balance": 500,
+      "id": "4d5ca2efb335"
+    },
+    {
+      "name": "MoneyPoint Account",
+      "provider": "MoneyPoint",
+      "initial_balance": 750,
+      "id": "2f3e92253c22"
+    },
+    {
+      "name": "Zero Balance Account",
+      "provider": "ZeroBank",
+      "initial_balance": 0,
+      "id": "9996689e1e40"
+    }
+  ],
+  "transactions": [
+    {
+      "type": "deposit",
+      "account": "Primary Account",
+      "amount": 500,
+      "description": "Regular deposit",
+      "success": true,
+      "new_balance": 2275.0
+    },
+    {
+      "type": "withdrawal",
+      "account": "Primary Account",
+      "amount": 200,
+      "description": "Regular withdrawal",
+      "success": true,
+      "new_balance": 2275.0
+    },
+    {
+      "type": "transaction_safety_test",
+      "account": "Safety Test Account",
+      "original_balance": 100,
+      "final_balance": 150,
+      "rollback_successful": false
+    }
+  ],
+  "transfers": [
+    {
+      "from_account": "Primary Account",
+      "to_provider": "PalmPay",
+      "amount": 300,
+      "before_from_balance": 2275.0,
+      "after_from_balance": 1975.0,
+      "before_to_balance": 500,
+      "after_to_balance": 800,
+      "success": true
+    }
+  ],
+  "loans": [
+    {
+      "type": "borrow",
+      "account": "Primary Account",
+      "amount": 500,
+      "loan_type": "personal",
+      "success": true,
+      "new_balance": 2475.0
+    },
+    {
+      "type": "repay",
+      "account": "Primary Account",
+      "amount": 200,
+      "success": true,
+      "remaining_loan": 300
+    }
+  ],
+  "balances": [
+    {
+      "timestamp": "2025-04-06 00:21:35.079148",
+      "consolidated_balance": 3525.0,
+      "consolidated_savings": 25.0,
+      "expected_balance": 3525.0,
+      "expected_savings": 25.0,
+      "accounts_included": [
+        "Primary Account",
+        "PalmPay Account",
+        "MoneyPoint Account"
+      ],
+      "calculation_accurate": true
+    }
+  ],
+  "currency_conversions": [
+    {
+      "from_currency": "USD",
+      "to_currency": "EUR",
+      "amount": 100,
+      "converted_amount": 92.0
+    },
+    {
+      "from_currency": "USD",
+      "to_currency": "GBP",
+      "amount": 100,
+      "converted_amount": 79.0
+    }
+  ],
+  "security_tests": [],
+  "operator_tests": [
+    {
+      "operation": "addition",
+      "original_balance": 3025.0,
+      "amount_added": 500,
+      "result_balance": 3525.0
+    },
+    {
+      "operation": "account_combination",
+      "account1": "Primary Account",
+      "account1_balance": 3025.0,
+      "account2": "PalmPay Account",
+      "account2_balance": 800,
+      "combined_balance": 3825.0,
+      "calculation_accurate": true
+    }
+  ],
+  "auto_savings_tests": [
+    {
+      "original_percentage": 5,
+      "new_percentage": 15,
+      "deposit_amount": 1000,
+      "savings_before": 25.0,
+      "savings_after": 175.0,
+      "savings_increase": 150.0,
+      "expected_increase": 150.0,
+      "calculation_accurate": true
+    }
+  ],
+  "edge_cases": [
+    {
+      "case": "negative_balance_creation",
+      "expected": "error",
+      "actual": "error",
+      "success": true,
+      "error": "\u274c Error: Initial balance cannot be negative."
+    },
+    {
+      "case": "credit_withdrawal",
+      "account": "Zero Balance Account",
+      "amount": 150,
+      "new_balance": -150,
+      "success": true
+    },
+    {
+      "case": "exceed_credit_limit",
+      "expected": "error or false result",
+      "actual": "success",
+      "success": false
+    },
+    {
+      "case": "self_linking",
+      "expected": false,
+      "actual": false,
+      "success": true
+    },
+    {
+      "case": "duplicate_linking",
+      "expected": false,
+      "actual": false,
+      "success": true
+    },
+    {
+      "case": "transfer_nonexistent",
+      "expected": "error or false result",
+      "actual": "error",
+      "success": true,
+      "error": "Result indicated failure"
+    },
+    {
+      "case": "transfer_excessive",
+      "expected": "error or false result",
+      "actual": "error",
+      "success": true,
+      "error": "Result indicated failure"
+    },
+    {
+      "case": "excessive_loan",
+      "expected": "error or false result",
+      "actual": "error or rejection",
+      "success": true,
+      "error": "Result indicated rejection"
+    },
+    {
+      "case": "locked_withdrawal",
+      "expected": "error or false result",
+      "actual": "rejection",
+      "success": true
+    }
+  ]
+}
